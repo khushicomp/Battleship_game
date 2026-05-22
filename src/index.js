@@ -43,10 +43,10 @@ function computerTurn() {
 
 function gameAttack(x, y) {
 
-const alreadyHit =
-    computer.gameboard.hitAttacks.some(coord =>
-        coord[0] === x && coord[1] === y
-    );
+    const alreadyHit =
+        computer.gameboard.hitAttacks.some(coord =>
+            coord[0] === x && coord[1] === y
+        );
 
     const alreadyMissed =
     computer.gameboard.missedAttacks.some(coord =>
@@ -54,30 +54,30 @@ const alreadyHit =
     );
 
     if (alreadyHit || alreadyMissed) {
+        return;
+    }
+
+    computer.gameboard.recieveAttack(x, y);
+
+    if (computer.gameboard.allShipsSunk()) {
+
+        alert('You Win!');
+
+        return;
+    }
+
+    computerTurn();
+
+    if (player1.gameboard.allShipsSunk()) {
+
+    alert('Computer Wins!');
+
     return;
     }
 
-  computer.gameboard.recieveAttack(x, y);
+    renderBoard(playerBoard, player1.gameboard, true);
 
-  if (computer.gameboard.allShipsSunk()) {
-
-    alert('You Win!');
-
-    return;
-}
-
-  computerTurn();
-
-  if (player1.gameboard.allShipsSunk()) {
-
-  alert('Computer Wins!');
-
-  return;
-}
-
-  renderBoard(playerBoard, player1.gameboard, true);
-
-  renderBoard(computerBoard, computer.gameboard, false);
+    renderBoard(computerBoard, computer.gameboard, false);
 
 }
 
@@ -127,7 +127,7 @@ function renderBoard(boardElement, gameboard, showShips = false) {
                         cell.classList.add('miss');
                     }
                     
-                }
+            }
 
             for(const hit of gameboard.hitAttacks){
                 if(hit[0]===x && hit[1]===y){
