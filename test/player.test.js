@@ -1,4 +1,4 @@
-import Player from "../src/player";
+import Player from "../src/player.js";
 
 test('creates human player by default', ()=>{
     const player = new Player();

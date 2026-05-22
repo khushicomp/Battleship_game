@@ -1,4 +1,4 @@
-import Ship from '../src/ship';
+import Ship from '../src/ship.js';
 
 test('ship length is correct', ()=>{
     const ship=new Ship(3);

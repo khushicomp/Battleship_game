@@ -2,6 +2,7 @@ class GameBoard {
     constructor(){
         this.ships=[];
         this.missedAttacks=[];
+        this.hitAttacks=[];
     }
 
     placeShip(ship, x, y){
@@ -23,6 +24,9 @@ class GameBoard {
 
                 if(coordinate[0]===x && coordinate[1]===y){
                     obj.ship.hit();
+
+                    this.hitAttacks.push([x,y]);
+                    
                     return 'hit';
                 }
             }
