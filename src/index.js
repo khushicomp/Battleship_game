@@ -1,3 +1,4 @@
+const targetQueue = [];
 import Player from './player.js';
 import Ship from './ship.js';
 
@@ -37,26 +38,69 @@ function randomCoordinate() {
 
 }
 
+function addAdjacentTargets(x,y){
+    const directions = [
+        [-1,0],
+        [1,0],
+        [0,-1],
+        [0,1],
+    ];
+
+    for (const dir of directions){
+        const newX = x+dir[0];
+        const newY = y+dir[1];
+
+        const alreadyAdded = computerAttacks.some(coord => 
+            coord[0]===newX &&
+            coord[1]===newY 
+        );
+
+        if(
+            newX>=0 &&
+            newX<10 &&
+            newY>=0 &&
+            newY<10 &&
+            !alreadyAdded
+        ){
+            targetQueue.push([newX, newY]);
+        }
+    }
+}
+
 function computerTurn() {
 
-  let x;
-  let y;
-  let alreadyAttacked = true;
+    let x;
+    let y;
+  
+    if(targetQueue.length > 0){
 
-  while (alreadyAttacked) {
+        const target = targetQueue.shift();
 
-    x = randomCoordinate();
-    y = randomCoordinate();
+        x= target[0];
+        y= target[1];
 
-    alreadyAttacked = computerAttacks.some(coord =>
-      coord[0] === x && coord[1] === y
-    );
-  }
+    }else {
 
-  computerAttacks.push([x, y]);
+        let alreadyAttacked = true;
 
-  player1.gameboard.recieveAttack(x, y);
+        while (alreadyAttacked) {
 
+            x = randomCoordinate();
+            y = randomCoordinate();
+
+            alreadyAttacked = computerAttacks.some(coord =>
+            coord[0] === x && coord[1] === y
+            );
+        }
+    }
+
+    computerAttacks.push([x, y]);
+
+    const result = player1.gameboard.recieveAttack(x, y);
+
+    if(result === 'hit'){
+        addAdjacentTargets(x,y);
+    }
 }
 
 function gameAttack(x, y) {
