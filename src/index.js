@@ -5,10 +5,28 @@ const player1 = new Player('human');
 const computer = new Player('computer');
 const computerAttacks = [];
 
-player1.gameboard.placeShip(new Ship(3), 0, 0);
-player1.gameboard.placeShip(new Ship(2), 4, 4);
+function placeShipsRandomly(gameboard){
+    const shipSizes=[5,4,3,3,2];
 
-computer.gameboard.placeShip(new Ship(3), 2, 2);
+    for(const size of shipSizes){
+
+        let placed = false;
+
+        while(!placed){
+            const x=randomCoordinate();
+            const y=randomCoordinate();
+
+            const ship = new Ship(size);
+
+            const direction = Math.random() < 0.5 ? 'horizontal' : 'vertical';
+
+            placed = gameboard.placeShip(ship, x, y, direction);
+        }
+    }
+}
+
+placeShipsRandomly(player1.gameboard);
+placeShipsRandomly(computer.gameboard);
 
 const playerBoard = document.getElementById('player-board');
 const computerBoard = document.getElementById('computer-board');
