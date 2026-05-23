@@ -19,7 +19,8 @@ body {
 .cell {
   width: 40px;
   height: 40px;
-  background-color: lightblue;
+  border-radius: 15%;
+  background-color: rgb(136, 218, 245);
   border: 1px solid black;
 }
 .ship {
