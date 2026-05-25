@@ -9,18 +9,34 @@
 
   <h1>Battleship</h1>
 
-  <div id="boards">
+  <div id="mode-screen">
+    <h2>Choose Game Mode</h2>
+    <button id="pvc-btn">vs Computer</button>
+    <button id="pvp-btn">vs Player</button>
+  </div>
 
+  <div id="game-over-screen">
+    <h2 id="winner-message"></h2>
+    <button id="restart-btn">Play Again</button>
+  </div>
+
+  <div id="status-bar">
+    <p id="status-text"></p>
+    <button id="continue-btn">Continue</button>
+  </div>
+
+  <button id="direction-btn">Direction: Horizontal</button>
+  <div id="ship-dock"></div>
+
+  <div id="boards">
     <div>
-      <h2>Player</h2>
+      <h2 id="player-label">Your Board</h2>
       <div id="player-board"></div>
     </div>
-
     <div>
-      <h2>Computer</h2>
+      <h2 id="computer-label">Enemy</h2>
       <div id="computer-board"></div>
     </div>
-
   </div>
 
   <script type="module" src="./src/index.js"></script>

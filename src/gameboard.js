@@ -29,7 +29,7 @@ class GameBoard {
         return true;
     }
 
-    recieveAttack(x,y){
+    receiveAttack(x,y){
         for(const obj of this.ships){
             for(const coordinate of obj.coordinates){
 
